@@ -42,7 +42,7 @@ PHP 8
 ## Installation
 
 ```
-composer install ivanrussu/multipart-form-data-converter 
+composer require ivanrussu/multipart-form-data-converter 
 ```
 
 ## Usage
