@@ -1,5 +1,7 @@
 # multipart/form-data converter
 
+Demo: https://multipart-form-data-converter.herokuapp.com/
+
 Converts multipart requests like 
 
 ```
@@ -42,7 +44,7 @@ PHP 8
 ## Installation
 
 ```
-composer install ivanrussu/multipart-form-data-converter 
+composer require ivanrussu/multipart-form-data-converter 
 ```
 
 ## Usage
