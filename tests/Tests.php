@@ -86,14 +86,14 @@ class Tests extends TestCase
         $actual = $formatter->format($message->parse());
         $expected =
             <<<'EXPECTED'
-            plain: 1
-            index_key[0]: index_key_0
-            index_key[1]: index_key_1
-            determined_index_key[4]: determined_index_key_4
-            string_key[a]: string_key_a
-            string_key[b]: string_key_b
-            string_key_index_key[c][0]: string_key_index_key_c_0
-            string_key_index_key[c][1]: string_key_index_key_c_1
+            plain:1
+            index_key[0]:index_key_0
+            index_key[1]:index_key_1
+            determined_index_key[4]:determined_index_key_4
+            string_key[a]:string_key_a
+            string_key[b]:string_key_b
+            string_key_index_key[c][0]:string_key_index_key_c_0
+            string_key_index_key[c][1]:string_key_index_key_c_1
             EXPECTED;
 
         self::assertEquals($expected, $actual);

@@ -26,7 +26,7 @@ class PostmanBulkEditFormatter implements Formatter
                     $key_write .= '[' . $key . ']';
                 }
 
-                $res[] = $key_write . ': ' . $value;
+                $res[] = $key_write . ':' . $value;
                 continue;
             }
 
