@@ -40,7 +40,7 @@ class Tests extends TestCase
 
         string_key_index_key_c_0
         -----------------------------359001620640685356211451689597--
-         Content-Disposition: form-data; name="string_key_index_key[c][]"
+        Content-Disposition: form-data; name="string_key_index_key[c][]"
 
         string_key_index_key_c_1
         -----------------------------359001620640685356211451689597--
