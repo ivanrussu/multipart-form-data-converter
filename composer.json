@@ -1,6 +1,6 @@
 {
     "name": "ivanrussu/multipart-form-data-converter",
-    "version": "1.0.1",
+    "version": "1.0.2",
     "description": "Converts raw multipart mess to json or postman's \"bulk edit\" format",
     "license": "MIT",
     "authors": [
