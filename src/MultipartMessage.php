@@ -64,14 +64,19 @@ class MultipartMessage
             $this->result[$parameter->getKey()] = $parameter->getValue();
             return;
         }
-
+    
         $arr = $this->parseArray($parameter);
-        if (isset($this->result[$parameter->getArrayKey()])) {
-            $this->result[$parameter->getArrayKey()] = array_merge_recursive($this->result[$parameter->getArrayKey()], $arr);
+        $key = $parameter->getArrayKey();
+        if (isset($this->result[$key])) {
+            $sameKeyUsedForNonArrayValue = !is_array($this->result[$key]);
+            if ($sameKeyUsedForNonArrayValue) {
+                $this->result[$key] = [];
+            }
+            $this->result[$key] = array_merge_recursive($this->result[$key], $arr);
             return;
         }
-
-        $this->result[$parameter->getArrayKey()] = $arr;
+    
+        $this->result[$key] = $arr;
     }
 
     private function parseArray(Parameter $parameter)
