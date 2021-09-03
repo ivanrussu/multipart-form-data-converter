@@ -72,11 +72,34 @@ class MultipartMessage
             if ($sameKeyUsedForNonArrayValue) {
                 $this->result[$key] = [];
             }
-            $this->result[$key] = array_merge_recursive($this->result[$key], $arr);
+            $this->result[$key] = $this->mergeArraysWithoutOverwritingNumericKeys($this->result[$key], $arr);
             return;
         }
     
         $this->result[$key] = $arr;
+    }
+    
+    /**
+     * Slightly modified version of https://www.php.net/manual/en/function.array-merge-recursive.php#106985
+     *
+     * @param ...$arrays
+     * @return mixed|null
+     */
+    private function mergeArraysWithoutOverwritingNumericKeys(...$arrays) {
+        $base = array_shift($arrays);
+        foreach ($arrays as $array) {
+            reset($base);
+            foreach ($array as $key => $value) {
+                if (is_array($value) && isset($base[$key]) && is_array($base[$key])) {
+                    $base[$key] = $this->mergeArraysWithoutOverwritingNumericKeys($base[$key], $value);
+                    continue;
+                }
+                
+                $base[$key] = $value;
+            }
+        }
+        
+        return $base;
     }
 
     private function parseArray(Parameter $parameter)

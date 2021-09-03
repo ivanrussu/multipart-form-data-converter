@@ -60,8 +60,51 @@ class Tests extends TestCase
 
         non_array_value
         -----------------------------359001620640685356211451689597--
+        Content-Disposition: form-data; name="array_of_objects[0][props_1]"
+
+        1
+        -----------------------------359001620640685356211451689597--
+        Content-Disposition: form-data; name="array_of_objects[0][props_2]"
+
+        2
+        -----------------------------359001620640685356211451689597--
+         Content-Disposition: form-data; name="array_of_objects[1][props_1]"
+
+        3
+        -----------------------------359001620640685356211451689597--
+        Content-Disposition: form-data; name="array_of_objects[1][props_2]"
+
+        4
+        -----------------------------359001620640685356211451689597--
         MULTIPART;
 
+//    public function testTemp() {
+//        $str = '-----------------------------359001620640685356211451689597--
+//        Content-Disposition: form-data; name="fruits[0][green]"
+//
+//        apple
+//        -----------------------------359001620640685356211451689597--
+//        Content-Disposition: form-data; name="fruits[0][red]"
+//
+//        tomato
+//        -----------------------------359001620640685356211451689597--
+//         Content-Disposition: form-data; name="fruits[1][green]"
+//
+//        kiwi
+//        -----------------------------359001620640685356211451689597--
+//        Content-Disposition: form-data; name="fruits[1][red]"
+//
+//        strawberry
+//        -----------------------------359001620640685356211451689597--';
+//
+//
+//
+//
+//        $message = new MultipartMessage($str);
+//        $actual = $message->parse();
+//        var_dump(json_encode($actual));
+//        die;
+//    }
 
     public function testCorrectArrayParsing(): void
     {
@@ -90,7 +133,17 @@ class Tests extends TestCase
             'same_key_for_array_and_non_array_1' => [
                 'array_value'
             ],
-            'same_key_for_array_and_non_array_2' => 'non_array_value'
+            'same_key_for_array_and_non_array_2' => 'non_array_value',
+            'array_of_objects' => [
+                [
+                    'props_1' => 1,
+                    'props_2' => 2,
+                ],
+                [
+                    'props_1' => 3,
+                    'props_2' => 4,
+                ]
+            ]
         ];
 
         self::assertEquals(
@@ -116,6 +169,10 @@ class Tests extends TestCase
             string_key_index_key[c][1]:string_key_index_key_c_1
             same_key_for_array_and_non_array_1[0]:array_value
             same_key_for_array_and_non_array_2:non_array_value
+            array_of_objects[0][props_1]:1
+            array_of_objects[0][props_2]:2
+            array_of_objects[1][props_1]:3
+            array_of_objects[1][props_2]:4
             EXPECTED;
 
         self::assertEquals($expected, $actual);
@@ -128,7 +185,7 @@ class Tests extends TestCase
         $actual = $formatter->format($message->parse());
         $expected =
             <<<'EXPECTED'
-            {"plain":"1","index_key":["index_key_0","index_key_1"],"determined_index_key":{"4":"determined_index_key_4"},"string_key":{"a":"string_key_a","b":"string_key_b"},"string_key_index_key":{"c":["string_key_index_key_c_0","string_key_index_key_c_1"]},"same_key_for_array_and_non_array_1":["array_value"],"same_key_for_array_and_non_array_2":"non_array_value"}
+            {"plain":"1","index_key":["index_key_0","index_key_1"],"determined_index_key":{"4":"determined_index_key_4"},"string_key":{"a":"string_key_a","b":"string_key_b"},"string_key_index_key":{"c":["string_key_index_key_c_0","string_key_index_key_c_1"]},"same_key_for_array_and_non_array_1":["array_value"],"same_key_for_array_and_non_array_2":"non_array_value","array_of_objects":[{"props_1":"1","props_2":"2"},{"props_1":"3","props_2":"4"}]}
             EXPECTED;
 
         self::assertEquals($expected, $actual);
