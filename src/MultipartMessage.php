@@ -26,7 +26,7 @@ class MultipartMessage
     private function explodeByParameters(): array
     {
         preg_match_all(
-            '/((?:name=\"(?\'name\'[^\"]*)\")(?:[\r\n])+(?\'value\'.*))/',
+            '/((?:name=\"(?\'name\'[^\"]*)\")(?:[\r\n]){2}(?\'value\'.*))/',
             $this->multipart,
             $matches,
             PREG_SET_ORDER

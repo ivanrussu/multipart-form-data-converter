@@ -16,6 +16,10 @@ class Tests extends TestCase
 
         1
         -----------------------------359001620640685356211451689597
+        Content-Disposition: form-data; name="empty"
+
+        
+        -----------------------------359001620640685356211451689597
         Content-Disposition: form-data; name="index_key[]"
 
         index_key_0
@@ -113,6 +117,7 @@ class Tests extends TestCase
 
         $expected = [
             'plain'                => '1',
+            'empty'                => '',
             'index_key'            => [
                 'index_key_0',
                 'index_key_1',
@@ -160,6 +165,7 @@ class Tests extends TestCase
         $expected =
             <<<'EXPECTED'
             plain:1
+            empty:
             index_key[0]:index_key_0
             index_key[1]:index_key_1
             determined_index_key[4]:determined_index_key_4
@@ -185,7 +191,7 @@ class Tests extends TestCase
         $actual = $formatter->format($message->parse());
         $expected =
             <<<'EXPECTED'
-            {"plain":"1","index_key":["index_key_0","index_key_1"],"determined_index_key":{"4":"determined_index_key_4"},"string_key":{"a":"string_key_a","b":"string_key_b"},"string_key_index_key":{"c":["string_key_index_key_c_0","string_key_index_key_c_1"]},"same_key_for_array_and_non_array_1":["array_value"],"same_key_for_array_and_non_array_2":"non_array_value","array_of_objects":[{"props_1":"1","props_2":"2"},{"props_1":"3","props_2":"4"}]}
+            {"plain":"1","empty":"","index_key":["index_key_0","index_key_1"],"determined_index_key":{"4":"determined_index_key_4"},"string_key":{"a":"string_key_a","b":"string_key_b"},"string_key_index_key":{"c":["string_key_index_key_c_0","string_key_index_key_c_1"]},"same_key_for_array_and_non_array_1":["array_value"],"same_key_for_array_and_non_array_2":"non_array_value","array_of_objects":[{"props_1":"1","props_2":"2"},{"props_1":"3","props_2":"4"}]}
             EXPECTED;
 
         self::assertEquals($expected, $actual);
